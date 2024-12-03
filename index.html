@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Walidacja jQuery</title>
+    <link rel="stylesheet" href="styl.css">
+
+    
+    <!-- Wczytanie jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Wczytanie jQuery Validate -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+
+   
+</head>
+<body>
+
+    <h1>Walidacja jQuery</h1>
+    
+    <form id="contactForm">
+        <label for="name">Imię:</label>
+        <input type="text" id="name" name="name" required>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        
+        <label for="message">Wiadomość:</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
+        
+        <button type="submit">Wyślij</button>
+    </form>
+
+    <script>
+        $(document).ready(function () {
+           
+            $("#contactForm").validate({
+                rules: {
+                    name: {
+                        required: true,
+                        minlength: 2
+                    },
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    message: {
+                        required: true,
+                        minlength: 10
+                    }
+                },
+                messages: {
+                    name: {
+                        required: "Proszę podać swoje imię",
+                        minlength: "Imię musi mieć co najmniej 2 znaki"
+                    },
+                    email: {
+                        required: "Proszę podać swój adres email",
+                        email: "Proszę podać poprawny adres email"
+                    },
+                    message: {
+                        required: "Proszę wpisać wiadomość",
+                        minlength: "Wiadomość musi mieć co najmniej 10 znaków"
+                    }
+                },
+                submitHandler: function (form) {
+                    alert("Formularz został poprawnie wysłany!");
+                    form.reset(); 
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
